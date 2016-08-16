@@ -14,4 +14,4 @@ It has simply been adapted to the new lecture content of 2016.
 And then some more adaptation for bel.
 
 # Download latest PDF
-[Download freshly compiled PDF provided by latex.aslushnikov.com](http://latex.aslushnikov.com/compile?git=https://github.com/hellerbarde/eth-cil-exam-summary&target=main.tex)
+[Download freshly compiled PDF provided by latex.aslushnikov.com](http://latex.aslushnikov.com/compile?url=https%3A%2F%2Fraw.githubusercontent.com%2Fhellerbarde%2Feth-cil-exam-summary%2Fbel-2016%2Fmain.tex)
