@@ -146,7 +146,7 @@ $\mathbf{X} \in \mathbb{R}^{D \times N}$. $N$ observations, $K$ properties. Targ
 	\item $\mathbf{A} = \mathbf{U} \mathbf{D} \mathbf{V}^\top = \sum_{k=1}^{\operatorname{rank}(\mathbf{A})} d_{k,k} u_k (v_k)^\top$
 	\item $\mathbf{A} \in \mathbb{R}^{N \times P}, \mathbf{U} \in \mathbb{R}^{N \times N}, \mathbf{D} \in \mathbb{R}^{N \times P}, \mathbf{V} \in \mathbb{R}^{P \times P}$
 	\item $\mathbf{U}^\top \mathbf{U} = I = \mathbf{V}^\top \mathbf{V}$
-	\item $\mathbf{U}$ columns are eigenvectors of $\mathbf{A} \mathbf{A}^\top$, $\mathbf{V}$ columns are eigenvectors of $\mathbf{A}^\top \mathbf{A}$, SNIPPY, i.e. the square roots of the eigenvalues
+	\item $\mathbf{U}$ columns are eigenvectors of $\mathbf{A} \mathbf{A}^\top$, $\mathbf{V}$ columns are eigenvectors of $\mathbf{A}^\top \mathbf{A}$, SNIP, i.e. the square roots of the eigenvalues
 
 	\item Missing columns in $\mathbf{U}$ are basis of $\operatorname{null}(A^\top)$ and in $\mathbf{V}$ are basis of $\operatorname{null}(A)$. Calculate: $\mathbf{A}^\top \mathbf{u} = \mathbf{0}$ or $\mathbf{A} \mathbf{v} = \mathbf{0}$ for $\mathbf{u}$ or $\mathbf{v}$.
 \end{inparaitem}
@@ -324,7 +324,7 @@ Reconstruction Error $\|\mathbf{x}-\mathbf{\hat{x}}\|^2 = \sum_{d\notin\sigma}\l
 
 
 \subsection{Overcomplete Basis}
-$\mathbf{U} \in \mathbb{R}^{D \times  L}$ for SNIP L > D SNIP. Decoding involved $\rightarrow$ add constraint $\mathbf{z}^\star \in \argmin_\mathbf{z} \lVert \mathbf{z} \rVert_0$ s.t. $\mathbf{x} = \mathbf{Uz}$. NP-hard $\rightarrow$ approximate with 1-norm (convex) or with MP.
+$\mathbf{U} \in \mathbb{R}^{D \times  L}$ and $L > D$. Decoding involved $\rightarrow$ add constraint $\mathbf{z}^\star \in \argmin_\mathbf{z} \lVert \mathbf{z} \rVert_0$ s.t. $\mathbf{x} = \mathbf{Uz}$. NP-hard $\rightarrow$ approximate with 1-norm (convex) or with MP.
 
 \textbf{Coherence}
 \begin{inparaitem}[\color{red}\textbullet]
