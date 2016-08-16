@@ -51,7 +51,7 @@
   {\subsubcolorsection}
 \newcommand{\subsubcolorsection}[1]{%
 	\colorbox{blue!10}{\parbox[t][0em]{\dimexpr\columnwidth-2\fboxsep}{\thesubsubsection\ #1}}}
-	
+
 % environment for multicols inside a list
 \NewDocumentEnvironment{listcols}{O{2} O{0pt}}
 	{%
@@ -81,31 +81,22 @@
 \section{Essentials}
 \subsection{Matrix/Vector}
 \begin{compactdesc}
-	\item[Orthogonal:] (i.e. columns are orthonormal!) $\mathbf{A}^{-1} = \mathbf{A}^\top$, $\mathbf{A} \mathbf{A}^\top = \mathbf{A}^\top \mathbf{A} = \mathbf{I}$, $\operatorname{det}(\mathbf{A}) \in \{+1, -1\}$, $\operatorname{det}(\mathbf{A}^\top \mathbf{A}) = 1$
-	\item[Inner Product:] (in $\mathbb{R}^D$) $\langle \mathbf{x}, \mathbf{y} \rangle = \mathbf{x}^\top \mathbf{y} = \sum_{i=1}^{N} \mathbf{x}_i \mathbf{y}_i$.
+	\item[Inner Product:] $\langle \mathbf{x}, \mathbf{y} \rangle = \mathbf{x}^\top \mathbf{y} = \sum_{i=1}^{N} \mathbf{x}_i \mathbf{y}_i$.
 	\begin{inparaitem}[\color{red}\textbullet]
-		\item $\langle \mathbf{x} \pm \mathbf{y}, \mathbf{x} \pm \mathbf{y} \rangle = \langle \mathbf{x}, \mathbf{x} \rangle \pm 2 \langle \mathbf{x}, \mathbf{y} \rangle + \langle \mathbf{y}, \mathbf{y} \rangle$
-		\item $\langle \mathbf{x}, \mathbf{y} + \mathbf{z} \rangle = \langle \mathbf{x}, \mathbf{y} \rangle + \langle \mathbf{x}, \mathbf{z} \rangle$
-		\item $\langle \mathbf{x} + \mathbf{y}, \mathbf{z} \rangle = \langle \mathbf{x}, \mathbf{z} \rangle + \langle \mathbf{y}, \mathbf{z} \rangle$
 		\item $\langle \mathbf{x}, \mathbf{y} \rangle = \|\mathbf{x}\|_2 \cdot \|\mathbf{y}\|_2 \cdot \cos(\theta)$
-		\item If $\mathbf{y}$ is a unit vector then $\langle \mathbf{x}, \mathbf{y} \rangle$ projects $\mathbf{x}$ onto $\mathbf{y}$
+
 	\end{inparaitem}
-	\item[Outer Product:] $\mathbf{u} \mathbf{v}^\top$, $(\mathbf{u} \mathbf{v}^\top)_{i, j} = \mathbf{u}_i \mathbf{v}_j$
-	\item[Transpose:] $(\mathbf{A}^\top)^{-1} = (\mathbf{A}^{-1})^\top$
 	\item[Gram-Schmidt:] $\{\mathbf{w}_i\}_i$ non-orthogonal basis. $\mathbf{v}_n = \mathbf{w}_n - \sum_{i=1}^{n-1} \frac{\langle \mathbf{v}_i, \mathbf{w}_n \rangle}{\langle \mathbf{v}_i, \mathbf{v}_i \rangle} \mathbf{v}_i$ results in $\{\mathbf{v}_i\}_i$ an orthogonal basis
 \end{compactdesc}
 
 \subsection{Norms}
-\begin{inparadesc}
-	\item[\color{red}$l_0$:] $\|\mathbf{x}\|_0 := |\{i | x_i \neq 0\}|$
-	\item[\color{red}Nuclear:] $\|\mathbf{X}\|_\star = \sum_{i=1}^{\min(m, n)} \sigma_i$
-	\item[\color{red}Euclidean:] $\|\mathbf{x}\|_2 := \sqrt{\sum_{i=1}^{N} \mathbf{x}_i^2} = \sqrt{\mathbf{x}^\top \mathbf{x}} = \sqrt{\langle \mathbf{x}, \mathbf{x} \rangle}$
-	\item[\color{red}$p$-norm:] $\|\mathbf{x}\|_p := \left( \sum_{i=1}^{N} |x_i|^p \right)^{\frac{1}{p}}$
-	\item[\color{red}Frobenius:] $\|\mathbf{A}\|_F :=\allowbreak \sqrt{\sum_{i=1}^{M} \sum_{j=1}^{N} |\mathbf{A}_{i, j}|^2} =\allowbreak \sqrt{\operatorname{trace}(\mathbf{A}^\top \mathbf{A})} =\allowbreak \sqrt{\sum_{i=1}^{\min\{m, n\}} \sigma_i^2}$ ($\sigma_i$ is the $i$-th singularvalue), $\mathbf{A} \in \mathbb{R}^{M \times N}$
-\end{inparadesc}
-
-\subsection{Basis Transformation}
-$\mathbf{V}, \mathbf{W}$ are two basis matrices (each column is a basis vector, invertible). Representing $\mathbf{x}$ in basis $\mathbf{V}$ by \emph{coordinate vector} $\mathbf{a}$: $\mathbf{x} = \mathbf{V} \mathbf{a} \Rightarrow \mathbf{a} = \mathbf{V}^{-1} \mathbf{x}$. Knowing $\mathbf{a}$ representing $\mathbf{x}$ in $\mathbf{V}$ we can calculate coordinate vector $\mathbf{b}$ representing $\mathbf{x}$ in $\mathbf{W}$ with: $\mathbf{x} = \mathbf{W}^{-1} \mathbf{b} = \mathbf{V}^{-1} \mathbf{a} \Rightarrow \mathbf{b} = \mathbf{W} \mathbf{V}^{-1} \mathbf{a}$.
+\begin{inparaitem}
+	\item $\|\mathbf{x}\|_0 := |\{i | x_i \neq 0\}|$
+	\item $\|\mathbf{X}\|_\star = \sum_{i=1}^{\min(m, n)} \sigma_i$
+	\item $\|\mathbf{x}\|_2 := \sqrt{\sum_{i=1}^{N} \mathbf{x}_i^2} = \sqrt{\mathbf{x}^\top \mathbf{x}} = \sqrt{\langle \mathbf{x}, \mathbf{x} \rangle}$
+	\item $\|\mathbf{x}\|_p := \left( \sum_{i=1}^{N} |x_i|^p \right)^{\frac{1}{p}}$
+	\item $\|\mathbf{A}\|_F :=\allowbreak \sqrt{\sum_{i=1}^{M} \sum_{j=1}^{N} |\mathbf{A}_{i, j}|^2} =\allowbreak \sqrt{\operatorname{trace}(\mathbf{A}^\top \mathbf{A})} =\allowbreak \sqrt{\sum_{i=1}^{\min\{m, n\}} \sigma_i^2}$
+\end{inparaitem}
 
 \subsection{Eigenvalue / -vectors}
 Eigenvalue Problem: $\mathbf{Ax} = \lambda \mathbf{x}$
@@ -117,9 +108,8 @@ Eigenvalue Problem: $\mathbf{Ax} = \lambda \mathbf{x}$
 \end{compactenum}
 
 \subsection{Eigendecomposition}
-$\mathbf{A} \in \mathbb{R}^{N \times N}$ with $N$ linear independent eigenvectors, then: $\mathbf{A} = \mathbf{Q} \boldsymbol{\Lambda} \mathbf{Q}^{-1}$. $\mathbf{Q} \in \mathbb{R}^{N \times N}$, $i$-th column is the $i$-th eigenvector of $\mathbf{A}$. $\boldsymbol{\Lambda}$ is diagonal and $\boldsymbol{\lambda}_{i,i}$ is the $i$-th eigenvector. Every symmetric matrix can be ``eigendecomposed''. 
-$\mathbf{A}^{-1} = \mathbf{Q} \boldsymbol{\Lambda}^{-1} \mathbf{Q}^{-1}$, $(\boldsymbol{\Lambda}^{-1})_{i,i} = \frac{1}{\lambda_i}$
-Calculate eigenvalues $\lambda_i$ and eigenvectors $q_i$. Normalise the eigenvectors. Put eigenvectors as columns into $\mathbf{Q}$ and eigenvalues into the diagonal of $\boldsymbol{\Lambda}$.
+$\mathbf{A} \in \mathbb{R}^{N \times N}$ with $N$ linear independent eigenvectors, then: $\mathbf{A} = \mathbf{Q} \boldsymbol{\Lambda} \mathbf{Q}^{-1}$. Every symmetric matrix can be ``eigendecomposed''.
+$\mathbf{A}^{-1} = \mathbf{Q} \boldsymbol{\Lambda}^{-1} \mathbf{Q}^{-1}$
 
 \subsection{Probability / Statistics}
 \begin{inparaitem}[\color{red}\textbullet]
@@ -139,8 +129,8 @@ $\mathbf{X} \in \mathbb{R}^{D \times N}$. $N$ observations, $K$ properties. Targ
 	\item Empirical Mean: $\overline{\mathbf{x}} = \frac{1}{N} \sum_{n=1}^N \mathbf{x}_n$
 	\item Center Data: $\overline{\mathbf{X}} = \mathbf{X} - [\overline{\mathbf{x}}, \ldots, \overline{\mathbf{x}}] = \mathbf{X} - \mathbf{M}$
 	\item Cov. Matrix: $\boldsymbol{\Sigma} = \frac{1}{N	} \sum_{n=1}^N (\mathbf{x}_n - \overline{\mathbf{x}}) (\mathbf{x}_n - \overline{\mathbf{x}})^\top = \frac{1}{N} \overline{\mathbf{X}}\overline{\mathbf{X}}^\top$
-	\item Eigenvalue Decomposition: $\boldsymbol{\Sigma} = \mathbf{U} \boldsymbol{\Lambda} \mathbf{U}^\top$, sort eigenvalues (and eigenvectors) in descending order
-	\item Select $K < D$, keep only the first $K$ eigenvalues and corresponding eigenvectors $\Rightarrow \mathbf{U}_K, \boldsymbol{\lambda}_K$
+	\item Eigenvalue Decomposition: $\boldsymbol{\Sigma} = \mathbf{U} \boldsymbol{\Lambda} \mathbf{U}^\top$
+	\item Select $K < D$, $\Rightarrow \mathbf{U}_K, \boldsymbol{\lambda}_K$
 	\item Transform data onto new Basis: $\overline{\mathbf{Z}}_K = \mathbf{U}_K^\top \overline{\mathbf{X}}$
 	\item Reconstruct to original Basis: $\tilde{\overline{\mathbf{X}}} = \mathbf{U}_k \overline{\mathbf{Z}}_K$
 	\item Reverse centering: $\tilde{\mathbf{X}} = \tilde{\overline{\mathbf{X}}} + \mathbf{M}$
@@ -155,9 +145,9 @@ $\mathbf{X} \in \mathbb{R}^{D \times N}$. $N$ observations, $K$ properties. Targ
 \begin{inparaitem}[\color{red}\textbullet]
 	\item $\mathbf{A} = \mathbf{U} \mathbf{D} \mathbf{V}^\top = \sum_{k=1}^{\operatorname{rank}(\mathbf{A})} d_{k,k} u_k (v_k)^\top$
 	\item $\mathbf{A} \in \mathbb{R}^{N \times P}, \mathbf{U} \in \mathbb{R}^{N \times N}, \mathbf{D} \in \mathbb{R}^{N \times P}, \mathbf{V} \in \mathbb{R}^{P \times P}$
-	\item $\mathbf{U}^\top \mathbf{U} = I = \mathbf{V}^\top \mathbf{V}$ ($\mathbf{U}, \mathbf{V}$ columns are orthonormal)
-	\item $\mathbf{U}$ columns are eigenvectors of $\mathbf{A} \mathbf{A}^\top$, $\mathbf{V}$ columns are eigenvectors of $\mathbf{A}^\top \mathbf{A}$, $\mathbf{D}$ diagonal elements are singular values, i.e. the square roots of the eigenvalues ($\mathbf{A}^\top \mathbf{A}$ and $\mathbf{A} \mathbf{A}^\top$ have the same eigenvalues)
-	\item $(\mathbf{D}^{-1})_{i,i} = \frac{1}{\mathbf{D}_{i, i}}$ ($\mathbf{D} \in \mathbb{R}^{N \times P} \to \mathbf{D}^{-1} \in \mathbb{R}^{P \times N}$, i.e. don't forget to transpose)
+	\item $\mathbf{U}^\top \mathbf{U} = I = \mathbf{V}^\top \mathbf{V}$
+	\item $\mathbf{U}$ columns are eigenvectors of $\mathbf{A} \mathbf{A}^\top$, $\mathbf{V}$ columns are eigenvectors of $\mathbf{A}^\top \mathbf{A}$, SNIPPY, i.e. the square roots of the eigenvalues
+
 	\item Missing columns in $\mathbf{U}$ are basis of $\operatorname{null}(A^\top)$ and in $\mathbf{V}$ are basis of $\operatorname{null}(A)$. Calculate: $\mathbf{A}^\top \mathbf{u} = \mathbf{0}$ or $\mathbf{A} \mathbf{v} = \mathbf{0}$ for $\mathbf{u}$ or $\mathbf{v}$.
 \end{inparaitem}
 
@@ -181,16 +171,17 @@ Using only $K$ largest eigenvalues and corresponding eigenvectors. $\tilde{\math
 	\item[\color{red}Target:] $\min_{\mathbf{U}, \mathbf{Z}} J(\mathbf{U}, \mathbf{Z}) = \|\mathbf{X} - \mathbf{U} \mathbf{Z}\|_F^2 = \sum_{n=1}^N \sum_{k=1}^K \mathbf{z}_{k,n} \|\mathbf{x}_n - \mathbf{u}_k\|_2^2$
 \end{inparadesc}
 \begin{inparaenum}[\color{red} 1.]
-	\item Initiate: choose $K$ centroids $\mathbf{U} = [\mathbf{u}_1, \ldots, \mathbf{u}_K]$ (usually u.a.r.)
-	\item Assign data points to clusters. $k^\star(\mathbf{x}_n) = \argmin_k \{ \|\mathbf{x}_n - \mathbf{u}_k\|_2 \}$ returns cluster $k^\star$, whose centroid $\mathbf{u}_{k^\star}$ is closest to data point $\mathbf{x}_n$. Set $\mathbf{z}_{k^\star,n} = 1$, and for $ l \neq k^\star~ \mathbf{z}_{l,n}=0$.
+	\item Initiate: choose $K$ centroids $\mathbf{U} = [\mathbf{u}_1, \ldots, \mathbf{u}_K]$
+	\item Assign data points to clusters. $k^\star(\mathbf{x}_n) = \argmin_k \{ \|\mathbf{x}_n - \mathbf{u}_k\|_2 \}$ SNIP. Set $\mathbf{z}_{k^\star,n} = 1$, and for $ l \neq k^\star~ \mathbf{z}_{l,n}=0$.
 	\item Update centroids: $\mathbf{u}_k = \frac{\sum_{n=1}^N z_{k,n} \mathbf{x}_n}{\sum_{n=1}^N z_{k,n}}$.
 	\item Repeat from step 2, stops if $\|\mathbf{Z} - \mathbf{Z}^\text{new}\|_0 = \|\mathbf{Z} - \mathbf{Z}^\text{new}\|^2_F = 0$.
 \end{inparaenum}
+
 \subsection{Clustering Stability}
 \begin{inparaitem}[\color{red}\textbullet]
-  \item dist. between clust. (same data): $d(C,C') := \min_\Pi \frac{1}{2}\|Z-\Pi(Z')\|^2_F$ , $\Pi(Z
+  \item $d(C,C') := \min_\Pi \frac{1}{2}\|Z-\Pi(Z')\|^2_F$ , $\Pi(Z
 ')$ = row perm. of $Z$
-  \item arbitrary sets $\mathbf{X},\mathbf{X'}$ of size $N,N'$: $r := \frac{1}{N'} \min_{\Pi \in \mathbb{S}_K} \{ \sum_{n=1}^{N'} \mathbb{I}_{\{\Pi(\phi(x'_n)) \neq z'_n\} } \}$ ($\phi$: multi-class classifier trained on ($\mathbf{X},\mathbf{Z}$))
+  \item arbitrary sets $\mathbf{X},\mathbf{X'}$ of size $N,N'$: $r := \frac{1}{N'} \min_{\Pi \in \mathbb{S}_K} \{ \sum_{n=1}^{N'} \mathbb{I}_{\{\Pi(\phi(x'_n)) \neq z'_n\} } \}$
   \item random assignment with $K$ clusters of equal size: $r_{rand} = \frac{K-1}{K}$
   \item $stability := 1-r/r_{rand}$
 \end{inparaitem}
@@ -217,8 +208,8 @@ For GMM let $\boldsymbol{\theta}_k = (\boldsymbol{\mu}_k, \boldsymbol{\Sigma}_k)
 \subsection{Model Order Selection (AIC / BIC for GMM)}
 Trade-off between data fit (i.e. likelihood $p(\mathbf{X} | \theta)$) and complexity (i.e. \# of free parameters $\kappa(\cdot)$). For choosing $K$:
 \begin{inparaitem}[\color{red}\textbullet]
-	\item \textbf{Akaike Information Criterion}: $\operatorname{AIC}(\theta | \mathbf{X}) = -\log p_\theta(\mathbf{X}) + \kappa(\theta)$
-	\item \textbf{Bayesian Information Criterion}: $\operatorname{BIC}(\theta | \mathbf{X}) = -\log p_\theta(\mathbf{X}) + \frac{1}{2} \kappa(\theta) \log N$
+	\item $\operatorname{AIC}(\theta | \mathbf{X}) = -\log p_\theta(\mathbf{X}) + \kappa(\theta)$
+	\item $\operatorname{BIC}(\theta | \mathbf{X}) = -\log p_\theta(\mathbf{X}) + \frac{1}{2} \kappa(\theta) \log N$
 	\item \# of free params: fixed covariance matrix: $\kappa(\theta) = K \cdot D + (K - 1)$ ($K$: \# clusters, $D$: $\mathsf{dim}\text{(data)}=\mathsf{dim}(\mu_i)$, $K-1$: \# free clusters), full covariance matrix: $\kappa(\theta) = K(D + \frac{D(D+1)}{2}) + (K - 1)$.
 	\item Compare AIC/BIC for different $K$ -- the smaller the better. BIC penalizes complexity more.
 \end{inparaitem}
@@ -240,16 +231,16 @@ Trade-off between data fit (i.e. likelihood $p(\mathbf{X} | \theta)$) and comple
   \item[Co-occurence Matrix:]$\mathbf{N} = (n_{ij}) \in \mathbb{R}^{|V|\cdot |C|} \leftrightarrow \# w_i$ in c'txt $w_j$
   \item[Objective:] $H(\theta;\mathbf{N}) = \sum_{n_{ij} > 0} f(n_{ij})(\log n_{ij} - \log \exp[\langle \mathbf{x}_i, \mathbf{y}_j \rangle + b_i + d_j])^2$ with $f(n) = \min\{1, (\frac{n}{n_{max}})^\alpha\}$, $\alpha \in (0;1]$.
 \end{compactdesc}
-unnormalized distribution $\rightarrow$ two-sided loss function
+
 \begin{compactdesc}
-  \item[SGD:] 1. $\mathbf{x}_i^{new} \leftarrow \mathbf{x}_i + 2\eta f(n_{ij})(\log n_{ij} - \langle \mathbf{x}_i, \mathbf{y}_j \rangle)\mathbf{y}_j$ 
+  \item[SGD:] 1. $\mathbf{x}_i^{new} \leftarrow \mathbf{x}_i + 2\eta f(n_{ij})(\log n_{ij} - \langle \mathbf{x}_i, \mathbf{y}_j \rangle)\mathbf{y}_j$
   \item \hspace{26pt}2. $\mathbf{y}_j^{new} \leftarrow \mathbf{y}_j + 2\eta f(n_{ij})(\log n_{ij} - \langle \mathbf{x}_i, \mathbf{y}_j \rangle)\mathbf{x}_i$
 \end{compactdesc}
 
 \section{Non-Negative Matrix Factorization (NMF) / pLSA}
 \begin{compactdesc}
 	\item[Context Model:] $p(w | d) = \sum_{z=1}^K p(w | z) p(z | d)$
-	\item[Conditional independence assumption ($*$):] $p(w|d) = \sum_z p(w,z|d) = \sum_z p(w|d,z)p(z|d) \stackrel{*}{=} \sum_z p(w|z)p(z|d)$ 
+	\item[Conditional independence assumption ($*$):] $p(w|d) = \sum_z p(w,z|d) = \sum_z p(w|d,z)p(z|d) \stackrel{*}{=} \sum_z p(w|z)p(z|d)$
 	\item[Symmetric parameterization:] $p(w, d) = \sum_z p(z)p(w | z) p(d | z)$
 \end{compactdesc}
 
@@ -280,9 +271,6 @@ $\min_{\mathbf{U}, \mathbf{V}} J(\mathbf{U}, \mathbf{V}) = \frac{1}{2} \|\mathbf
 \section{Convolutional Neural Networks}
 \textbf{Neurons}: $F_\sigma(\mathbf{x};\mathbf{w}) = \sigma(w_0 + \sum_{i=1}^M{x_iw_i})$. \textbf{Output}: linear regression; $\mathbf{y} = \mathbf{W}^L\mathbf{x}^{L-1}$, binary classification; $y_1 = \text{P}[Y=1|\mathbf{x}] = \frac{1}{1 + \exp[-\langle \mathbf{w}_1^L,\mathbf{x}^{L-1}\rangle]}$, multiclass; $y_k = \text{P}[Y=k|\mathbf{x}]= \frac{\exp[\langle \mathbf{w}_k^L,\mathbf{x}^{L-1}\rangle]}{\sum_{m=1}^{K}{\exp[\langle \mathbf{w}_m^L, \mathbf{x}^{L-1}\rangle]}}$. \textbf{Loss function} $l(y, \hat{y})$: squared loss; $\frac{1}{2}(y - \hat{y})^2$, cross-entropy loss; $-y \log \hat{y} - (1-y)\log(1-\hat{y})$.
 
-\subsection{Neural Networks for Images}
-Translation invariance of images $\rightarrow$ neurons compute same fct, shift invariant filters; weights defined as filter masks, e.g. convolution: $F_{n,m}(\mathbf{x};\mathbf{w}) = \sigma(b + \sum_{k=-2}^2\sum_{l=-2}^{2}{w_{k,l}x_{n+k,m+1}})$. To reduce dimension of convolution, use \{max, avg\}-pooling 
-
 \section{Optimization}
 
 \subsection{Coordinate Descent (update the $d$-th coord. per step)}
@@ -307,7 +295,7 @@ Assume \textbf{Additive Objective}; $f(x) = \frac{1}{N}\sum_{n=1}^{N}f_n(x)$
 	\item init: $\mathbf{x}^{(0)} \in \mathbb{R}^D$
 	\item for $t = 0 \ \text{to} \ \mathit{maxIter}$:
 	\item sample u.a.r. $n \sim \{1, \ldots, N\}$
-	\item $\mathbf{x}^{(t+1)} = \mathbf{x}^{(t)} - \gamma \nabla f_n(\mathbf{x}^{(t)})$, usually stepsize $\gamma \approx \frac{1}{t}$. 
+	\item $\mathbf{x}^{(t+1)} = \mathbf{x}^{(t)} - \gamma \nabla f_n(\mathbf{x}^{(t)})$, usually stepsize $\gamma \approx \frac{1}{t}$.
 \end{inparaenum}
 
 \subsection{Projected Gradient Descent (Constrained Opt.)}
@@ -325,7 +313,7 @@ Minimize  $f(\mathbf{x})$ s.t. $g_i(\mathbf{x}) \leq 0,\ i = 1, .., m$ (\textbf{
 \end{compactdesc}
 
 \subsection{Convex Optimization}
-$f : \mathbb{R}^D \rightarrow \mathbb{R}$ is convex, if $dom\ f$ is a convex set, and if $\forall \mathbf{x}, \mathbf{y} \in dom\ f$, and for $0 \leq \alpha \leq 1$: $f(\alpha \mathbf{x} + (1 - \alpha)\mathbf{y}) \leq \alpha f(\mathbf{x}) + (1-\alpha)f(\mathbf{y})$. local=global min, \textbf{Convergence}: $f(\mathbf{x}^{(t)}) - f(\mathbf{x}^*) \le \frac{c}{t}$. 
+$f : \mathbb{R}^D \rightarrow \mathbb{R}$ is convex, if $dom\ f$ is a convex set, and if $\forall \mathbf{x}, \mathbf{y} \in dom\ f$, and for $0 \leq \alpha \leq 1$: $f(\alpha \mathbf{x} + (1 - \alpha)\mathbf{y}) \leq \alpha f(\mathbf{x}) + (1-\alpha)f(\mathbf{y})$. local=global min, \textbf{Convergence}: $f(\mathbf{x}^{(t)}) - f(\mathbf{x}^*) \le \frac{c}{t}$.
 \textbf{Subgradient} $g \in \mathbb{R}^D$ of $f$ at $\mathbf{x}$: $f(\mathbf{y}) \geq f(\mathbf{x}) + g^\top(\mathbf{y}-\mathbf{x}) \ \forall \mathbf{y}$
 
 \section{Sparse Coding}
@@ -333,16 +321,16 @@ $f : \mathbb{R}^D \rightarrow \mathbb{R}$ is convex, if $dom\ f$ is a convex set
 \subsection{Orthogonal Basis}
 For $\mathbf{x}$ and o.n.b. $\mathbf{U}$ compute $\mathbf{z} = \mathbf{U}^\top \mathbf{x} $. Approx $ \mathbf{\hat{x}} = \mathbf{U\hat{z}}$, $\hat{z}_i = z_i$ if $ \lvert z_i \rvert > \epsilon$ else 0.
 Reconstruction Error $\|\mathbf{x}-\mathbf{\hat{x}}\|^2 = \sum_{d\notin\sigma}\langle\mathbf{x},\mathbf{u}_d\rangle ^2$.
-Choice of base depends on signal. Fourier for global, wavelet for local support. PCA basis optimal for given $\Sigma$.
+
 
 \subsection{Overcomplete Basis}
-$\mathbf{U} \in \mathbb{R}^{D \times  L}$ for $\mathsf{dim}\text{(data)} = L > D =$ \# atoms. Decoding involved $\rightarrow$ add constraint $\mathbf{z}^\star \in \argmin_\mathbf{z} \lVert \mathbf{z} \rVert_0$ s.t. $\mathbf{x} = \mathbf{Uz}$. NP-hard $\rightarrow$ approximate with 1-norm (convex) or with MP.
+$\mathbf{U} \in \mathbb{R}^{D \times  L}$ for SNIP L > D SNIP. Decoding involved $\rightarrow$ add constraint $\mathbf{z}^\star \in \argmin_\mathbf{z} \lVert \mathbf{z} \rVert_0$ s.t. $\mathbf{x} = \mathbf{Uz}$. NP-hard $\rightarrow$ approximate with 1-norm (convex) or with MP.
 
 \textbf{Coherence}
 \begin{inparaitem}[\color{red}\textbullet]
 	\item $m(\mathbf{U}) = \max_{i,j:\, i \neq j} | \mathbf{u}_i^\top \mathbf{u}_j |$
 	\item $m(\mathbf{B}) = 0$ if $\mathbf{B}$ orthogonal matrix
-	\item $m([\mathbf{B}, \mathbf{u}]) \geq \frac{1}{\sqrt{D}}$ if atom $\mathbf{u}$ is added to orthogonal basis $\mathbf{B}$ (o.n.b. = orthonormal base)
+	\item $m([\mathbf{B}, \mathbf{u}]) \geq \frac{1}{\sqrt{D}}$ if atom $\mathbf{u}$ is added to orthogonal basis $\mathbf{B}$
 \end{inparaitem}
 
 \textbf{Matching Pursuit (MP)}
@@ -363,7 +351,7 @@ Objective: $\mathbf{z}^\star \in \argmin_{\mathbf{z}} \|\mathbf{x} - \mathbf{Uz}
 \end{inparaitem}
 
 \subsection{Dictionary Learning}
-Adapt the dictionary to signal characteristics. Objective: $(\mathbf{U}^\star, \mathbf{Z}^\star) \in \argmin_\mathbf{U,Z} \| \mathbf{X} - \mathbf{U} \cdot \mathbf{Z} \|_F^2$ not jointly convex but convex in 1 argument.
+Adapt the dictionary to signal characteristics. Objective: $(\mathbf{U}^\star, \mathbf{Z}^\star) \in \argmin_\mathbf{U,Z} \| \mathbf{X} - \mathbf{U} \cdot \mathbf{Z} \|_F^2$.
 
 \textbf{Matrix Factorization by Iter Greedy Minimization}
 \begin{inparaenum}[\color{red} 1.]
