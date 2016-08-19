@@ -12,6 +12,7 @@
 \usepackage[small,compact]{titlesec}
 \usepackage[usenames,dvipsnames,svgnames,table]{xcolor}
 \usepackage{xparse}
+\usepackage{bm}
 
 % compact text
 \linespread{0.9}
@@ -32,7 +33,7 @@
   {0pt}
   {\colorsection}
 \newcommand{\colorsection}[1]{%
-	\colorbox{red!10}{\parbox[t][0em]{\dimexpr\columnwidth-2\fboxsep}{\thesection\ #1}}}
+	\colorbox{red!30}{\parbox[t][0em]{\dimexpr\columnwidth-2\fboxsep}{\thesection\ #1}}}
 
 
 \titleformat{name=\subsection}[block]
@@ -41,7 +42,7 @@
   {0pt}
   {\subcolorsection}
 \newcommand{\subcolorsection}[1]{%
-	\colorbox{orange!10}{\parbox[t][0em]{\dimexpr\columnwidth-2\fboxsep}{\thesubsection\ #1}}}
+	\colorbox{orange!30}{\parbox[t][0em]{\dimexpr\columnwidth-2\fboxsep}{\thesubsection\ #1}}}
 
 
 \titleformat{name=\subsubsection}[block]
@@ -50,7 +51,7 @@
   {0pt}
   {\subsubcolorsection}
 \newcommand{\subsubcolorsection}[1]{%
-	\colorbox{blue!10}{\parbox[t][0em]{\dimexpr\columnwidth-2\fboxsep}{\thesubsubsection\ #1}}}
+	\colorbox{blue!30}{\parbox[t][0em]{\dimexpr\columnwidth-2\fboxsep}{\thesubsubsection\ #1}}}
 
 % environment for multicols inside a list
 \NewDocumentEnvironment{listcols}{O{2} O{0pt}}
@@ -78,24 +79,28 @@
 \begin{document}
 \begin{multicols*}{3}
 
+
 \section{Essentials}
 \subsection{Matrix/Vector}
 \begin{compactdesc}
 	\item[Inner Product:] $\langle \mathbf{x}, \mathbf{y} \rangle = \mathbf{x}^\top \mathbf{y} = \sum_{i=1}^{N} \mathbf{x}_i \mathbf{y}_i$.
 	\begin{inparaitem}[\color{red}\textbullet]
 		\item $\langle \mathbf{x}, \mathbf{y} \rangle = \|\mathbf{x}\|_2 \cdot \|\mathbf{y}\|_2 \cdot \cos(\theta)$
-
+        \item If $\|\mathbf{y}\|_2 = 1 \Rightarrow \mathbf{x}^\top y = \|\mathbf{x}\|_2 \cos\theta$, magnitude of projection of $\mathbf{x}$ onto $\mathbf{y}$ 
 	\end{inparaitem}
 	\item[Gram-Schmidt:] $\{\mathbf{w}_i\}_i$ non-orthogonal basis. $\mathbf{v}_n = \mathbf{w}_n - \sum_{i=1}^{n-1} \frac{\langle \mathbf{v}_i, \mathbf{w}_n \rangle}{\langle \mathbf{v}_i, \mathbf{v}_i \rangle} \mathbf{v}_i$ results in $\{\mathbf{v}_i\}_i$ an orthogonal basis
 \end{compactdesc}
+$\mathrm{trace}(\mathbf{XYZ}) = \mathrm{trace}(\mathbf{ZXY})$
 
 \subsection{Norms}
-\begin{inparaitem}
+\begin{inparaitem}[\color{red}\textbullet]
 	\item $\|\mathbf{x}\|_0 := |\{i | x_i \neq 0\}|$
 	\item $\|\mathbf{X}\|_\star = \sum_{i=1}^{\min(m, n)} \sigma_i$
-	\item $\|\mathbf{x}\|_2 := \sqrt{\sum_{i=1}^{N} \mathbf{x}_i^2} = \sqrt{\mathbf{x}^\top \mathbf{x}} = \sqrt{\langle \mathbf{x}, \mathbf{x} \rangle}$
+	\item $\|\mathbf{x}\|_2 := \sqrt{\sum_{i=1}^{N} \mathbf{x}_i^2} = \sqrt{\mathbf{x}^\top \mathbf{x}}$
 	\item $\|\mathbf{x}\|_p := \left( \sum_{i=1}^{N} |x_i|^p \right)^{\frac{1}{p}}$
 	\item $\|\mathbf{A}\|_F :=\allowbreak \sqrt{\sum_{i=1}^{M} \sum_{j=1}^{N} |\mathbf{A}_{i, j}|^2} =\allowbreak \sqrt{\operatorname{trace}(\mathbf{A}^\top \mathbf{A})} =\allowbreak \sqrt{\sum_{i=1}^{\min\{m, n\}} \sigma_i^2}$
+	\item $\|\mathbf{M}\|_1 = \sum_{i,j}|m_{ij}|$
+    \item $\|\mathbf{X}\|_2 = \sigma_{max}(\mathbf{X})$
 \end{inparaitem}
 
 \subsection{Eigenvalue / -vectors}
@@ -139,6 +144,7 @@ $\mathbf{X} \in \mathbb{R}^{D \times N}$. $N$ observations, $K$ properties. Targ
 \begin{compactitem}
 	\item For compression save $\mathbf{U}_k, \overline{\mathbf{Z}}_K, \overline{\mathbf{x}}$.
 	\item $\mathbf{U}_k \in \mathbb{R}^{D \times K}, \boldsymbol{\Sigma} \in \mathbb{R}^{D \times D}, \overline{\mathbf{Z}}_K \in \mathbb{R}^{K \times N}, \overline{\mathbf{X}} \in \mathbb{R}^{D \times N}$
+	\item error $J = \sum^D_{d=K+1} \mathbf{u}^\top_d \bm{\Sigma} \mathbf{u}_d$
 \end{compactitem}
 
 \section{SVD}
@@ -146,21 +152,21 @@ $\mathbf{X} \in \mathbb{R}^{D \times N}$. $N$ observations, $K$ properties. Targ
 	\item $\mathbf{A} = \mathbf{U} \mathbf{D} \mathbf{V}^\top = \sum_{k=1}^{\operatorname{rank}(\mathbf{A})} d_{k,k} u_k (v_k)^\top$
 	\item $\mathbf{A} \in \mathbb{R}^{N \times P}, \mathbf{U} \in \mathbb{R}^{N \times N}, \mathbf{D} \in \mathbb{R}^{N \times P}, \mathbf{V} \in \mathbb{R}^{P \times P}$
 	\item $\mathbf{U}^\top \mathbf{U} = I = \mathbf{V}^\top \mathbf{V}$
-	\item $\mathbf{U}$ columns are eigenvectors of $\mathbf{A} \mathbf{A}^\top$, $\mathbf{V}$ columns are eigenvectors of $\mathbf{A}^\top \mathbf{A}$, $\sigma = \sqrt{\lambda}$.
+	\item $\mathbf{U}$ columns are EVs of $\mathbf{A} \mathbf{A}^\top$, $\mathbf{V}$ columns are EVs of $\mathbf{A}^\top \mathbf{A}$, $\sigma = \sqrt{\lambda}$. If $\mathbf{S} = \mathbf{S}^\top \Rightarrow \mathbf{S} = \mathbf{U}\mathbf{D}\mathbf{U}^\top$
 
 	\item Missing columns in $\mathbf{U}$ are basis of $\operatorname{null}(A^\top)$ and in $\mathbf{V}$ are basis of $\operatorname{null}(A)$. Calculate: $\mathbf{A}^\top \mathbf{u} = \mathbf{0}$ or $\mathbf{A} \mathbf{v} = \mathbf{0}$ for $\mathbf{u}$ or $\mathbf{v}$.
 \end{inparaitem}
 
 \begin{compactenum}
 	\item calculate $\mathbf{A}^\top \mathbf{A}$.
-	\item calculate eigenvalues of $\mathbf{A}^\top \mathbf{A}$, the square root of them, in descending order, are the diagonal elements of $\mathbf{D}$.
-	\item calculate eigenvectors of $\mathbf{A}^\top \mathbf{A}$ using the eigenvalues resulting in the columns of $\mathbf{V}$.
-	\item calculate the missing matrix: $\mathbf{U} = \mathbf{A} \mathbf{V} \mathbf{D}^{-1}$. Can be checked by calculating the eigenvectors of $\mathbf{A} \mathbf{A}^\top$.
+	\item calculate EWs of $\mathbf{A}^\top \mathbf{A}$, $diag(\sqrt{x_1}, \dots, \sqrt{x_n}) = \mathbf{D}$.
+	\item calculate EVs of $\mathbf{A}^\top \mathbf{A}$ using the EWs $\Rightarrow$ columns of $\mathbf{V}$.
+	\item $\mathbf{U} = \mathbf{A} \mathbf{V} \mathbf{D}^{-1}$.
 	\item normalize each column of $\mathbf{U}$ and $\mathbf{V}$.
 \end{compactenum}
-
+Collaborative filtering: $\mathbf{U}$: users-to-concept affinity, $\mathbf{V}$: Movies-to-concept simil., $\mathbf{D}$: expressiveness of each concept
 \subsection{Low-Rank approximation}
-Using only $K$ largest eigenvalues and corresponding eigenvectors. $\tilde{\mathbf{A}}_{i, j} = \sum_{k}^K \mathbf{U}_{i, k} \mathbf{D}_{k,k} \mathbf{V}_{j, k} = \mathbf{U}_{i, k} \mathbf{D}_{k,k} (\mathbf{V}^\top)_{k, j}$.
+Using only $K$ largest EWs and EVs. $\tilde{\mathbf{A}}_{i, j} = \sum_{k}^K \mathbf{U}_{i, k} \mathbf{D}_{k,k} \mathbf{V}_{j, k} = \mathbf{U}_{i, k} \mathbf{D}_{k,k} (\mathbf{V}^\top)_{k, j}$.
 \begin{compactdesc}
 	\item[Error Frobenius:] $\|\mathbf{A} - \tilde{\mathbf{A}}\|_F = \sqrt{\sum_{i > K} \sigma_i^2} = \sqrt{\sum_{i > K} \lambda_i}$
 	\item[Error Euclidean:] $\|\mathbf{A} - \tilde{\mathbf{A}}\|_2 = \sigma_{K+1}$
@@ -168,10 +174,10 @@ Using only $K$ largest eigenvalues and corresponding eigenvectors. $\tilde{\math
 
 \section{$K$-means Algorithm}
 \begin{inparadesc}
-	\item[\color{red}Target:] $\min_{\mathbf{U}, \mathbf{Z}} J(\mathbf{U}, \mathbf{Z}) = \|\mathbf{X} - \mathbf{U} \mathbf{Z}\|_F^2 = \sum_{n=1}^N \sum_{k=1}^K \mathbf{z}_{k,n} \|\mathbf{x}_n - \mathbf{u}_k\|_2^2$
+	\item[\color{red}Target:] $\min_{\mathbf{U}, \mathbf{Z}} J(\mathbf{U}, \mathbf{Z}) = \|\mathbf{X} - \mathbf{U} \mathbf{Z}\|_F^2 = \sum_{n=1}^N \sum_{k=1}^K z_{k,n} \|\mathbf{x}_n - \mathbf{u}_k\|_2^2$
 \end{inparadesc}
 \begin{inparaenum}[\color{red} 1.]
-	\item Initiate: choose $K$ centroids $\mathbf{U} = [\mathbf{u}_1, \ldots, \mathbf{u}_K]$
+	\item Init: choose $K$ centroids $\mathbf{U} = [\mathbf{u}_1, \ldots, \mathbf{u}_K]$
 	\item Assign data points to clusters. $k^\star(\mathbf{x}_n) = \argmin_k \{ \|\mathbf{x}_n - \mathbf{u}_k\|_2 \}$. Set $\mathbf{z}_{k^\star,n} = 1$, and for $ l \neq k^\star~ \mathbf{z}_{l,n}=0$.
 	\item Update centroids: $\mathbf{u}_k = \frac{\sum_{n=1}^N z_{k,n} \mathbf{x}_n}{\sum_{n=1}^N z_{k,n}}$.
 	\item Repeat from step 2, stops if $\|\mathbf{Z} - \mathbf{Z}^\text{new}\|_0 = \|\mathbf{Z} - \mathbf{Z}^\text{new}\|^2_F = 0$.
@@ -179,11 +185,11 @@ Using only $K$ largest eigenvalues and corresponding eigenvectors. $\tilde{\math
 
 \subsection{Clustering Stability}
 \begin{inparaitem}[\color{red}\textbullet]
-  \item $d(C,C') := \min_\Pi \frac{1}{2}\|Z-\Pi(Z')\|^2_F$ , $\Pi(Z
-')$ = row perm. of $Z$
+  \item $d(C,C') := \min_\Pi \frac{1}{2}\|\mathbf{Z}-\Pi(\mathbf{Z}')\|^2_F$ , $\Pi(\mathbf{Z}
+')$ = row perm. of $\mathbf{Z}'$
   \item arbitrary sets $\mathbf{X},\mathbf{X'}$ of size $N,N'$: $r := \frac{1}{N'} \min_{\Pi \in \mathbb{S}_K} \{ \sum_{n=1}^{N'} \mathbb{I}_{\{\Pi(\phi(x'_n)) \neq z'_n\} } \}$
   \item random assignment with $K$ clusters of equal size: $r_{rand} = \frac{K-1}{K}$
-  \item $stability := 1-r/r_{rand}$
+  \item $stability := 1-r/r_{rand}$, $stab = 1$: no inconsistent assign., $= 0$: no better than rand.
 \end{inparaitem}
 
 \section{Gaussian Mixture Models (GMM)}
@@ -194,6 +200,7 @@ For GMM let $\boldsymbol{\theta}_k = (\boldsymbol{\mu}_k, \boldsymbol{\Sigma}_k)
 	\item[Complete data distribution:] $p_\theta(\mathbf{x}, \mathbf{z}) = \prod_{k=1}^K \left( \boldsymbol{\pi}_k p_{\theta_k}(\mathbf{x})\right)^{z_k}$
 	\item[Posterior Probabilities:] $\\\operatorname{Pr}(\mathbf{z}_k = 1 | \mathbf{x}) = \frac{\operatorname{Pr}(\mathbf{z}_k = 1) p(\mathbf{x} | \mathbf{z}_k = 1)}{\sum_{l=1}^K \operatorname{Pr}(\mathbf{z}_l = 1) p(\mathbf{x} | \mathbf{z}_l = 1)} = \frac{\boldsymbol{\pi}_k p_{\theta_k}(\mathbf{x})}{\sum_{l=1}^K \boldsymbol{\pi}_l p_{\theta_l}(\mathbf{x})}$
 	\item[Likelihood of observed data $\mathbf{X}$:] $p_\theta(\mathbf{X}) = \prod_{n=1}^N p_\theta(\mathbf{x}_n) = \prod_{n=1}^N \left(\sum_{k=1}^K \pi_k p_{\theta_k}(\mathbf{x}_n)\right)$
+	\item[Maximize log-likelihood:] $L(\bm{X},\bm{\pi},\bm{\mu},\bm{\Sigma}) = ln\ p(\bm{X}|\bm{\pi},\bm{\mu},\bm{\Sigma}) = \sum^{N}_{n=1}ln \left\{ \sum^{K}_{k=1} \pi_k \cdot \mathcal{N} \left( \bm{x}_n | \bm{\mu}_k, \bm{\Sigma}_k \right)\right\}$
 	\item[MLE:] $\argmax_\theta\sum_{n=1}^N \log \left( \sum_{k=1}^K \pi_k p_{\theta_k}(\mathbf{x}_n)\right) \break \log \left( \sum_{k=1}^K{\frac{q_k \pi_k p_{\theta_k}(\mathbf{x}_n)}{q_k}}\right) \ge \sum_{k=1}^K{q_k[\log p_{\theta_k}(\mathbf{x}_n) + \log \pi_k - \log q_k]}$ with $\sum_{k=1}^K{q_k} = 1$ by Jensen. Lagrangian and get $q_k$ as below.
 \end{compactdesc}
 
@@ -245,10 +252,11 @@ Trade-off between data fit (i.e. likelihood $p(\mathbf{X} | \theta)$) and comple
 \end{compactdesc}
 
 \subsection{EM for pLSA:}
+$x_{ij} = $ \# occurences of $w_j$ in $d_i$
 \begin{compactenum}
   \item Log-Likelihood: $L(\mathbf{U}, \mathbf{V}) = \sum_{i,j} x_{i,j}\log p(w_j|d_i) = \break \sum_{(i,j) \in X} \log \sum_{z=1}^K p(w_j|z)p(z|d_i)$
 	\item E-Step (optimal q): $q_{zij} = \frac{p(w_j|z)p(z|d_i)}{\sum_{k=1}^K p(w_j|k)p(k|d_i)} := \frac{v_{zj}u_{zi}}{\sum_{k=1}^K u_{ki} v_{kj}}$
-	\item M-Steps: $p(z|d_i) = \frac{\sum_j x_{ij}q_{zij}}{\sum_j x_{ij}}\hspace{10pt}\&\hspace{10pt} p(w_j|z) = \frac{\sum_i x_{ij}q_{zij}}{\sum_{i,l}x_{il}q_{zil}}$
+	\item M-Steps: $u_{zi} = p(z|d_i) = \frac{\sum_j x_{ij}q_{zij}}{\sum_j x_{ij}}, v_{zj} = p(w_j|z) = \frac{\sum_i x_{ij}q_{zij}}{\sum_{i,l}x_{il}q_{zil}}$
 \end{compactenum}
 
 \subsection{NMF Algorithm for quadratic cost function}
@@ -273,7 +281,10 @@ $\min_{\mathbf{U}, \mathbf{V}} J(\mathbf{U}, \mathbf{V}) = \frac{1}{2} \|\mathbf
 
 \section{Optimization}
 
-\subsection{Coordinate Descent (update the $d$-th coord. per step)}
+\subsection{Unconstrained min: $\min f(\mathbf{x})$ with $\mathbf{x} \in \mathbb{R}^D$
+}
+
+\subsubsection{Coordinate Descent}
 \begin{inparaenum}[\color{red} 1.]
 	\item init: $\mathbf{x}^{(0)} \in \mathbb{R}^D$
 	\item for $t = 0 \ \text{to} \ \mathit{maxIter}$:
@@ -282,14 +293,14 @@ $\min_{\mathbf{U}, \mathbf{V}} J(\mathbf{U}, \mathbf{V}) = \frac{1}{2} \|\mathbf
 	\item $\mathbf{x}_d^{(t+1)} = u^\star$ and $\mathbf{x}_i^{(t+1)} = \mathbf{x}_i^{(t)}$ for $i \neq d$
 \end{inparaenum}
 
-\subsection{Gradient Descent (or Deepest Descent)}
+\subsubsection{Gradient Descent (or Deepest Descent)}
 \textbf{Gradient}: $\nabla f(\mathbf{x}) := \left( \frac{\partial f(\mathbf{x})}{\partial \mathbf{x}_1}, \ldots, \frac{\partial f(\mathbf{x})}{\partial \mathbf{x}_D} \right)^\top$
 \begin{inparaenum}[\color{red} 1.]
 	\item init: $\mathbf{x}^{(0)} \in \mathbb{R}^D$
 	\item for $t = 0 \ \text{to} \ \mathit{maxIter}$: $\mathbf{x}^{(t+1)} = \mathbf{x}^{(t)} - \gamma \nabla f(\mathbf{x}^{(t)})$, usually $\gamma \approx \frac{1}{t}$
 \end{inparaenum}
 
-\subsection{Stochastic Gradient Descent (SGD)}
+\subsubsection{Stochastic Gradient Descent (SGD)}
 Assume \textbf{Additive Objective}; $f(x) = \frac{1}{N}\sum_{n=1}^{N}f_n(x)$
 \begin{inparaenum}[\color{red} 1.]
 	\item init: $\mathbf{x}^{(0)} \in \mathbb{R}^D$
@@ -307,16 +318,31 @@ $\mathbf{x}^{(t+1)}$ is unique if $Q$ convex.
 \subsection{Lagrangian Multipliers}
 Minimize  $f(\mathbf{x})$ s.t. $g_i(\mathbf{x}) \leq 0,\ i = 1, .., m$ (\textbf{inequality constr.}) and $h_i(\mathbf{x}) = \mathbf{a}_i^\top \mathbf{x} - b_i = 0,\ i = 1, .., p$ (\textbf{equality constraint})
 \begin{compactdesc}
-	\item[Lagrangian:] $L(\mathbf{x}, \boldsymbol{\lambda}, \boldsymbol{\nu}) := f(\mathbf{x}) + \sum_{i=1}^m \lambda_i g_i(\mathbf{x}) + \sum_{i=1}^p \nu_i h_i(\mathbf{x})$
-	\item[Dual function:] $D(\boldsymbol{\lambda}, \boldsymbol{\nu}) := \inf_{\mathbf{x}} L(\mathbf{x}, \boldsymbol{\lambda}, \boldsymbol{\nu}) \in \mathbb{R}$
-	\item[Dual Problem:] $\max_{\boldsymbol{\lambda}, \boldsymbol{\nu}} D(\boldsymbol{\lambda}, \boldsymbol{\nu})$ s.t. $\boldsymbol{\lambda} \geq \mathbf{0}$. Note: $\max_{\boldsymbol{\lambda}, \boldsymbol{\nu}} D(\boldsymbol{\lambda}, \boldsymbol{\nu}) \le \min_\mathbf{x}{f(\mathbf{x})}$, equality if $dom\ f$ and $f$ convex
+	\item[Lagrangian:] $L(\mathbf{x}, \bm{\lambda}, \bm{\nu}) := f(\mathbf{x}) + \sum_{i=1}^m \lambda_i g_i(\mathbf{x}) + \sum_{i=1}^p \nu_i h_i(\mathbf{x})$
+	\item[Dual function:] $D(\bm{\lambda}, \bm{\nu}) := \inf_{\mathbf{x}} L(\mathbf{x}, \bm{\lambda}, \bm{\nu}) \in \mathbb{R}$
+	\item[Dual Problem:] $\max_{\bm{\lambda}, \bm{\nu}} D(\bm{\lambda}, \bm{\nu})$ s.t. $\bm{\lambda} \geq \mathbf{0}$. Note: $\max_{\bm{\lambda}, \bm{\nu}} D(\bm{\lambda}, \bm{\nu}) \le \min_\mathbf{x}{f(\mathbf{x})}$, equality if $dom\ f$ and $f$ convex
 \end{compactdesc}
 
 \subsection{Convex Optimization}
 $f : \mathbb{R}^D \rightarrow \mathbb{R}$ is convex, if $dom\ f$ is a convex set, and if $\forall \mathbf{x}, \mathbf{y} \in dom\ f$, and for $0 \leq \alpha \leq 1$: $f(\alpha \mathbf{x} + (1 - \alpha)\mathbf{y}) \leq \alpha f(\mathbf{x}) + (1-\alpha)f(\mathbf{y})$. local=global min, \textbf{Convergence}: $f(\mathbf{x}^{(t)}) - f(\mathbf{x}^*) \le \frac{c}{t}$.
 \textbf{Subgradient} $g \in \mathbb{R}^D$ of $f$ at $\mathbf{x}$: $f(\mathbf{y}) \geq f(\mathbf{x}) + g^\top(\mathbf{y}-\mathbf{x}) \ \forall \mathbf{y}$
+\textbf{Epigraph} of $f:\mathbb{R}^D \rightarrow \mathbb{R}: \left\{ (\mathbf{x}, t) | \mathbf{x} \in \mathrm{dom} f, f(x) \le t\right\}$, a fct is convex iff its epigraph is a convex set.
+\textbf{Convex fcts} $f(\mathbf{x}) = \mathbf{a}^\top \mathbf{x}$; $f(\mathbf{x}) = \mathbf{a}^\top \mathbf{x} + \mathbf{b}$; $f(\mathbf{x}) = e^{\alpha \mathbf{x}}$; Norms on $\mathbb{R}^D$
 
-\section{Sparse Coding}
+\subsubsection{with Equality Constraints}
+\begin{inparaitem}[\color{red}\textbullet]
+\item $\min_{\mathbf{x}} f(\mathbf{x})$ s.t. $\mathbf{A}\mathbf{x}= \mathbf{b}$
+\item $\mathcal{L}(\mathbf{x},\bm{\lambda}) = f(\mathbf{x}) + \bm{\lambda}^\top (\mathbf{A}\mathbf{x}-\mathbf{b})$
+\item $D(\bm{\lambda}) = \mathrm{inf}_{\mathbf{x}} \mathcal{L} (\mathbf{x}, \bm{\lambda})$
+\item $\max_{\bm{\lambda}} D(\bm{\lambda}),\ \bm{\lambda}^* \in \arg\max_{\bm{\lambda}} D(\bm{\lambda})$
+\item Recover optimal $\mathbf{x}^* \in \arg\min_{\mathbf{x}} \mathcal{L}(\mathbf{x}, \bm{\lambda}^*)$
+\end{inparaitem}
+
+
+\section{Sparse Coding: $\min_{\mathbf{z}} \|\mathbf{z}\|_0\ s.t. \|\mathbf{U}\mathbf{z}-\mathbf{x}\|_2 < \sigma $}
+
+
+Energy preserving: $\|\mathbf{U}^\top\mathbf{x}\|^2 = \|\mathbf{x}\|^2$
 
 \subsection{Orthogonal Basis}
 For $\mathbf{x}$ and o.n.b. $\mathbf{U}$ compute $\mathbf{z} = \mathbf{U}^\top \mathbf{x} $. Approx $ \mathbf{\hat{x}} = \mathbf{U\hat{z}}$, $\hat{z}_i = z_i$ if $ \lvert z_i \rvert > \epsilon$ else 0.
@@ -324,14 +350,16 @@ Reconstruction Error $\|\mathbf{x}-\mathbf{\hat{x}}\|^2 = \sum_{d\notin\sigma}\l
 
 
 \subsection{Overcomplete Basis}
-$\mathbf{U} \in \mathbb{R}^{D \times  L}$ and $L > D$. Decoding involved $\rightarrow$ add constraint $\mathbf{z}^\star \in \argmin_\mathbf{z} \lVert \mathbf{z} \rVert_0$ s.t. $\mathbf{x} = \mathbf{Uz}$. NP-hard $\rightarrow$ approximate with 1-norm (convex) or with MP.
+$\mathbf{U} \in \mathbb{R}^{D \times  L}$ and $L > D$. Decoding involved $\rightarrow$ add constraint $\mathbf{z}^\star \in \argmin_\mathbf{z} \lVert \mathbf{z} \rVert_0$ s.t. $\mathbf{x} = \mathbf{Uz}$. NP-hard $\rightarrow$ approximate with 1-norm (convex, $\mathbf{z}^* = \arg\min_{\mathbf{z}} \|\mathbf{z}\|_1\ s.t.\n \mathbf{x} = \mathbf{U}\mathbf{z} $) or with MP.
 
 \textbf{Coherence}
 \begin{inparaitem}[\color{red}\textbullet]
 	\item $m(\mathbf{U}) = \max_{i,j:\, i \neq j} | \mathbf{u}_i^\top \mathbf{u}_j |$
-	\item $m(\mathbf{B}) = 0$ if $\mathbf{B}$ orthogonal matrix
-	\item $m([\mathbf{B}, \mathbf{u}]) \geq \frac{1}{\sqrt{D}}$ if atom $\mathbf{u}$ is added to orthogonal basis $\mathbf{B}$
+	\item $m(\mathbf{B}) = 0$ if $\mathbf{B}$ orthogonal basis
+	\item $m([\mathbf{B}, \mathbf{u}]) \geq \frac{1}{\sqrt{D}}$ if atom $\mathbf{u}$ is added to $\mathbf{B}$
 \end{inparaitem}
+
+\textbf{Noisy observations}: $\mathbf{x}=\mathbf{U}\mathbf{z} + \mathbf{n}$ $\sim \mathcal{N}\left( \mathbf{0}, \sigma^2\mathbf{I} \right)$
 
 \textbf{Matching Pursuit (MP)}
 approximation of $\mathbf{x}$ onto $\mathbf{U}$, using $K$ entries.
@@ -340,9 +368,12 @@ Objective: $\mathbf{z}^\star \in \argmin_{\mathbf{z}} \|\mathbf{x} - \mathbf{Uz}
 	\item init: $z \leftarrow 0, r \leftarrow x$
 	\item while $\|\mathbf{z}\|_0 < K$ do
 	\item select atom with smallest angle $i^\star = \argmax_i |\langle \mathbf{u}_i, \mathbf{r} \rangle|$
-	\item update coefficients: $\mathbf{z}_{i^\star} \leftarrow \mathbf{z}_{i^\star} + \langle \mathbf{u}_{i^\star}, \mathbf{r} \rangle$
+	\item update coefficients: $z_{i^\star} \leftarrow z_{i^\star} + \langle \mathbf{u}_{i^\star}, \mathbf{r} \rangle$
 	\item update residual: $\mathbf{r} \leftarrow \mathbf{r} - \langle \mathbf{u}_{i^\star}, \mathbf{r} \rangle \mathbf{u}_{i^\star}$.
 \end{inparaenum}
+
+\textbf{Recovery of MP}: Coherence $m(\mathbf{U}) = \max_{i\neq j}|\left< \mathbf{u}_i, \mathbf{u}_j \right>|$,
+exact recovery when: $K<\frac{1}{2}\left( 1+\frac{1}{m(\mathbf{U})} \right)$
 
 \textbf{Compressive Sensing}
 \begin{inparaitem}[\color{red}\textbullet]
@@ -361,17 +392,38 @@ Adapt the dictionary to signal characteristics. Objective: $(\mathbf{U}^\star, \
 
 \section{Robust PCA}
 \begin{compactitem}
-	\item Idea: Approximate $\mathbf{X}$ with $\mathbf{L} + \mathbf{S}$, $\mathbf{L}$ is low-rank, $\mathbf{S}$ is sparse.
+	\item Idea: Approximate $\mathbf{X}$ with $\mathbf{L}_0 + \mathbf{S}_0$, $\mathbf{L}_0$ is low-rank, $\mathbf{S}_0$ is sparse.
 	\item $\min_{\mathbf{L},\mathbf{S}}\mathsf{rank}(\mathbf{L}) + \mu \lVert \mathbf{S}\rVert_0$, s. t. $\mathbf{L} + \mathbf{S} = \mathbf{X}$. As non-convex, change to $\min_{\mathbf{L},\mathbf{S}} \|\mathbf{L}\|_\star + \lambda \lVert\mathbf{S}\rVert_1$ (\emph{not} the same in general)
 	\item Perfect reconstruction is \emph{not} possible if $\mathbf{S}$ is low-rank, $\mathbf{L}$ is sparse, or $\mathbf{X}$ is low-rank \textit{and} sparse at the same time
 \end{compactitem}
+
+\subsection{Dual Ascent (Gradient Method for Dual Problem)}
+$\bm{\lambda}^{t+1} = \bm{\lambda}^{t} + \eta \nabla D(\bm{\lambda}^t)$,
+$ \nabla D (\bm{\lambda}) = \mathbf{A}\mathbf{x}^*-\mathbf{b}$ for $\mathbf{x}^* \in \arg\min_\mathbf{x} \mathcal{L}(\mathbf{x},\bm{\lambda})$
+
+\textbf{Dual Decomposition}: $f(x)$ separable, $\mathbf{x} = \left[ \mathbf{x}_1 \dots \mathbf{x}_N \right]$
+
+$\min_\mathbf{x} \left[ f(\mathbf{x}) := f_1(\mathbf{x}_1) + \dots + f_N(\mathbf{x}_N) \right]$
+s.t.
+$\left[ \mathbf{A}\mathbf{x} := \sum_{i=1}^{N} \mathbf{A}_i \mathbf{x}_i \right]$
+
+\\$\Rightarrow \mathcal{L}(\mathbf{x},\bm{\lambda}) = \mathcal{L}_1(\mathbf{x}_1, \bm{\lambda}) + \dots + \mathcal{L}_N(\mathbf{x}_1, \bm{\lambda}) - \bm{\lambda}^\top\mathbf{b}$
+\\$\Rightarrow \mathcal{L}_i(\mathbf{x}_i,\bm{\lambda}) = f_i(\mathbf{x}_i) + \bm{\lambda}^\top \mathbf{A}_i \mathbf{x}_i$
+
+\textbf{Dual Decomposition for Dual Ascent}: 
+\\$\mathbf{x}_i^{t+1} := \arg\min_{\mathbf{x}_i} \mathcal{L}_i(\mathbf{x}_i,\lambda^t)$; 
+$\bm{\lambda}^{t+1} := \bm{\lambda}^t + \eta^t \left( \sum_{i=1}^{N} \mathbf{A}_i \mathbf{x}_i^{t+1} -\mathbf{b} \right) $
+
+
+
 
 \subsection{Alternating Direction Method of Multipliers (ADMM)}
 $\min_{\mathbf{x}_1, \mathbf{x}_2} f_1(\mathbf{x}_1) + f_2(\mathbf{x}_2)$ s. t. $\mathbf{A}_1 \mathbf{x}_1 + \mathbf{A}_2 \mathbf{x}_2 = \mathbf{b}$, $f_1, f_2$ convex
 \begin{inparaitem}[\color{red}\textbullet]
 	\item Augmented Lagrangian: $L_p(\mathbf{x}_1, \mathbf{x}_2, \boldsymbol{\nu}) = f_1(\mathbf{x}_1) + f_2(\mathbf{x}_2) + \boldsymbol{\nu}^\top (\mathbf{A}_1 \mathbf{x}_1 + \mathbf{A}_2 \mathbf{x}_2 - \mathbf{b}) + \frac{p}{2}\| \mathbf{A}_1 \mathbf{x}_1 + \mathbf{A}_2 \mathbf{x}_2 - \mathbf{b} \|_2^2$
 	\item ADMM: $\mathbf{x}_1^{(t+1)} := \argmin_{\mathbf{x}_1} L_p(\mathbf{x}_1, \mathbf{x}_2^{(t)}, \boldsymbol{\nu}^{(t)})$, $\mathbf{x}_2^{(t+1)} := \argmin_{\mathbf{x}_2} L_p(\mathbf{x}_1^{(t+1)}, \mathbf{x}_2, \boldsymbol{\nu}^{(t)})$, $\boldsymbol{\nu}^{(t+1)} := \boldsymbol{\nu}^{(t)} + p(\mathbf{A}_1 \mathbf{x}_1^{(t+1)} + \mathbf{A}_2 \mathbf{x}_2^{(t+1)} - \mathbf{b})$
-	\item ADDM for RPCA: $f_1(\mathbf{L}) = \|\mathbf{L}\|_\star$, $f_2(\mathbf{S}) = \lambda \| \mathbf{S} \|_1$, $\mathbf{A}_1 \mathbf{x}_1 + \mathbf{A}_2 \mathbf{x}_2 = \mathbf{b} \text{ becomes } \mathbf{L} + \mathbf{S} = \mathbf{X}$, therefore $L_p(\mathbf{L}, \mathbf{S}, \boldsymbol{\nu}) = \ldots$, $\boldsymbol{\nu}$ is matrix here!
+	\item ADDM for RPCA: $f_1(\mathbf{L}) = \|\mathbf{L}\|_\star$, $f_2(\mathbf{S}) = \lambda \| \mathbf{S} \|_1$, $\mathbf{A}_1 \mathbf{x}_1 + \mathbf{A}_2 \mathbf{x}_2 = \mathbf{b} \text{ becomes } \mathbf{L} + \mathbf{S} = \mathbf{X}$, therefore $L_p(\mathbf{L}, \mathbf{S}, \boldsymbol{\nu}) = \|\mathbf{L}\|_* + \nu \|\mathbf{S}\|_1 + \left< \bm{\nu}, \mathrm{vec}(\mathbf{L}+\mathbf{S}-\mathbf{X}) \right> + \frac{P}{2} \| \mathbf{L}+ \mathbf{S} - \mathbf{X} \|_F^2$, 
+
 \end{inparaitem}
 
 \raggedcolumns
