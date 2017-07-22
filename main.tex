@@ -199,15 +199,6 @@ Using only $K$ largest EWs and EVs. $\tilde{\mathbf{A}}_{i, j} = \sum_{k}^K \mat
 	\item Repeat from step 2, stops if $\|\mathbf{Z} - \mathbf{Z}^\text{new}\|_0 = \|\mathbf{Z} - \mathbf{Z}^\text{new}\|^2_F = 0$.
 \end{inparaenum}
 
-\subsection{Clustering Stability}
-\begin{inparaitem}[\color{red}\textbullet]
-  \item $d(C,C') := \min_\Pi \frac{1}{2}\|\mathbf{Z}-\Pi(\mathbf{Z}')\|^2_F$ , $\Pi(\mathbf{Z}
-')$ = row perm. of $\mathbf{Z}'$
-  \item arbitrary sets $\mathbf{X},\mathbf{X'}$ of size $N,N'$: $r := \frac{1}{N'} \min_{\Pi \in \mathbb{S}_K} \{ \sum_{n=1}^{N'} \mathbb{I}_{\{\Pi(\phi(x'_n)) \neq z'_n\} } \}$
-  \item random assignment with $K$ clusters of equal size: $r_{rand} = \frac{K-1}{K}$
-  \item $stability := 1-r/r_{rand}$, $stab = 1$: no inconsistent assign., $= 0$: no better than rand.
-\end{inparaitem}
-
 \section{Gaussian Mixture Models (GMM)}
 For GMM let $\boldsymbol{\theta}_k = (\boldsymbol{\mu}_k, \boldsymbol{\Sigma}_k)$; $p_{\theta_k}(\mathbf{x}) = \mathcal{N}(\mathbf{x} | \boldsymbol{\mu}_k, \Sigma_k)$
 \begin{compactdesc}
