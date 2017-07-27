@@ -111,15 +111,6 @@ $\mathrm{trace}(\mathbf{XYZ}) = \mathrm{trace}(\mathbf{ZXY})$
   \item $\frac{\partial}{\partial \mathbf{X}}(\|\mathbf{X}\|_F^2) = 2\mathbf{X}$
 \end{inparaitem}
 
-\subsection{Eigenvalue / -vectors}
-Eigenvalue Problem: $\mathbf{Ax} = \lambda \mathbf{x}$
-\begin{compactenum}
-	\item solve $\operatorname{det}(\mathbf{A} - \lambda \mathbf{I}) \overset{!}{=} 0$ resulting in $\{\lambda_i\}_i$
-	\item $\forall \lambda_i$:
-		solve $(\mathbf{A} - \lambda_i \mathbf{I}) \mathbf{x}_i = \mathbf{0}$, $\mathbf{x}_i$ is the $i$-th eigenvector.
-	\item (opt.) normalize eigenvector $q_i$: $q_i^{\text{norm}} = \frac{1}{\|q_i\|_2} q_i$.
-\end{compactenum}
-
 \subsection{Eigendecomposition}
 \begin{inparaitem}[\color{red}\textbullet]
   \item $\mathbf{A} \in \mathbb{R}^{N \times N}$ then $\mathbf{A} = \mathbf{Q} \boldsymbol{\Lambda} \mathbf{Q}^{-1}$ with $\mathbf{Q} \in \mathbb{R}^{N \times N}$.
