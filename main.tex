@@ -84,11 +84,6 @@
 \subsection{Matrix/Vector}
 \begin{compactdesc}
 	\item[Inner Product:] $\langle \mathbf{x}, \mathbf{y} \rangle = \mathbf{x}^\top \mathbf{y} = \sum_{i=1}^{N} \mathbf{x}_i \mathbf{y}_i$.
-	\begin{inparaitem}[\color{red}\textbullet]
-		\item $\langle \mathbf{x}, \mathbf{y} \rangle = \|\mathbf{x}\|_2 \cdot \|\mathbf{y}\|_2 \cdot \cos(\theta)$
-        \item If $\|\mathbf{y}\|_2 = 1 \Rightarrow \mathbf{x}^\top y = \|\mathbf{x}\|_2 \cos\theta$, magnitude of projection of $\mathbf{x}$ onto $\mathbf{y}$ 
-	\end{inparaitem}
-	\item[Gram-Schmidt:] $\{\mathbf{w}_i\}_i$ non-orthogonal basis. $\mathbf{v}_n = \mathbf{w}_n - \sum_{i=1}^{n-1} \frac{\langle \mathbf{v}_i, \mathbf{w}_n \rangle}{\langle \mathbf{v}_i, \mathbf{v}_i \rangle} \mathbf{v}_i$ results in $\{\mathbf{v}_i\}_i$ an orthogonal basis
 \end{compactdesc}
 $\mathrm{trace}(\mathbf{XYZ}) = \mathrm{trace}(\mathbf{ZXY})$
 
