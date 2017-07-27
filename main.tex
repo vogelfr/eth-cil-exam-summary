@@ -170,10 +170,10 @@ $\tilde{\mathbf{A}}_{i, j} = \sum_{k=1}^K \mathbf{U}_{i, k} \mathbf{D}_{k,k} \ma
 	\item[\color{red}Target:] $\min_{\mathbf{U}, \mathbf{Z}} J(\mathbf{U}, \mathbf{Z}) = \|\mathbf{X} - \mathbf{U} \mathbf{Z}\|_F^2 = \sum_{n=1}^N \sum_{k=1}^K z_{k,n} \|\mathbf{x}_n - \mathbf{u}_k\|_2^2$
 \end{inparadesc}
 \begin{inparaenum}[\color{red} 1.]
-	\item Init: choose $K$ centroids $\mathbf{U} = [\mathbf{u}_1, \ldots, \mathbf{u}_K]$
+	\item choose $K$ centroids $\mathbf{U} = [\mathbf{u}_1, \ldots, \mathbf{u}_K]$
 	\item Assign data points to clusters. $k^\star(\mathbf{x}_n) = \argmin_k \{ \|\mathbf{x}_n - \mathbf{u}_k\|_2 \}$. Set $\mathbf{z}_{k^\star,n} = 1$, and for $ l \neq k^\star~ \mathbf{z}_{l,n}=0$.
 	\item Update centroids: $\mathbf{u}_k = \frac{\sum_{n=1}^N z_{k,n} \mathbf{x}_n}{\sum_{n=1}^N z_{k,n}}$.
-	\item Repeat from step 2, stops if $\|\mathbf{Z} - \mathbf{Z}^\text{new}\|_0 = \|\mathbf{Z} - \mathbf{Z}^\text{new}\|^2_F = 0$.
+	\item goto step 2, stop if $\|\mathbf{Z} - \mathbf{Z}^\text{new}\|_0 = \|\mathbf{Z} - \mathbf{Z}^\text{new}\|^2_F = 0$.
 \end{inparaenum}
 
 \section{Gaussian Mixture Models (GMM)}
