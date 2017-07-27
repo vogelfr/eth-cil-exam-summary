@@ -300,7 +300,7 @@ minimize $f(x)$, $x \in Q$ (constraint).
 $\mathbf{x}^{(t+1)}$ is unique if $Q$ convex.
 
 \subsection{Lagrangian Multipliers}
-Minimize  $f(\mathbf{x})$ s.t. $g_i(\mathbf{x}) \leq 0,\ i = 1, .., m$ (\textbf{inequality constr.}) and $h_i(\mathbf{x}) = \mathbf{a}_i^\top \mathbf{x} - b_i = 0,\ i = 1, .., p$ (\textbf{equality constraint})
+Min $f(\mathbf{x})$ st $g_i(\mathbf{x}) \leq 0,\ i:1..m$ \& $h_i(\mathbf{x}) = \mathbf{a}_i^\top \mathbf{x} - b_i = 0,\ i:1..p$
 \begin{compactdesc}
 	\item[Lagrangian:] $L(\mathbf{x}, \bm{\lambda}, \bm{\nu}) := f(\mathbf{x}) + \sum_{i=1}^m \lambda_i g_i(\mathbf{x}) + \sum_{i=1}^p \nu_i h_i(\mathbf{x})$
 	\item[Dual function:] $D(\bm{\lambda}, \bm{\nu}) := \inf_{\mathbf{x}} L(\mathbf{x}, \bm{\lambda}, \bm{\nu}) \in \mathbb{R}$
