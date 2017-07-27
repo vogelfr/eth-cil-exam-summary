@@ -154,18 +154,10 @@ $\mathbf{X} \in \mathbb{R}^{D \times N}$. $N$ observations, $K$ properties. Targ
 	\item $\mathbf{A} \in \mathbb{R}^{N \times P}, \mathbf{U} \in \mathbb{R}^{N \times N}, \mathbf{D} \in \mathbb{R}^{N \times P}, \mathbf{V} \in \mathbb{R}^{P \times P}$
 	\item $\mathbf{U}^\top \mathbf{U} = I = \mathbf{V}^\top \mathbf{V}$
 	\item $\mathbf{U}$ columns are EVs of $\mathbf{A} \mathbf{A}^\top$, $\mathbf{V}$ columns are EVs of $\mathbf{A}^\top \mathbf{A}$, $\sigma = \sqrt{\lambda}$. If $\mathbf{S} = \mathbf{S}^\top \Rightarrow \mathbf{S} = \mathbf{U}\mathbf{D}\mathbf{U}^\top$
-
-	\item Missing columns in $\mathbf{U}$ are basis of $\operatorname{null}(A^\top)$ and in $\mathbf{V}$ are basis of $\operatorname{null}(A)$. Calculate: $\mathbf{A}^\top \mathbf{u} = \mathbf{0}$ or $\mathbf{A} \mathbf{v} = \mathbf{0}$ for $\mathbf{u}$ or $\mathbf{v}$.
+	\item Missing columns in $\mathbf{U}$ are basis of $\operatorname{null}(A^\top)$ and in $\mathbf{V}$ are basis of $\operatorname{null}(A)$. 
 \end{inparaitem}
 
-\begin{compactenum}
-	\item calculate $\mathbf{A}^\top \mathbf{A}$.
-	\item calculate EWs of $\mathbf{A}^\top \mathbf{A}$, $diag(\sqrt{x_1}, \dots, \sqrt{x_n}) = \mathbf{D}$.
-	\item calculate EVs of $\mathbf{A}^\top \mathbf{A}$ using the EWs $\Rightarrow$ columns of $\mathbf{V}$.
-	\item $\mathbf{U} = \mathbf{A} \mathbf{V} \mathbf{D}^{-1}$.
-	\item normalize each column of $\mathbf{U}$ and $\mathbf{V}$.
-\end{compactenum}
-Collaborative filtering: $\mathbf{U}$: users-to-concept affinity, $\mathbf{V}$: Movies-to-concept simil., $\mathbf{D}$: expressiveness of each concept
+$\mathbf{U}$: users-to-concept affinity, $\mathbf{V}$: Movies-to-concept simil., $\mathbf{D}$: expressiveness of each concept
 \subsection{Low-Rank approximation}
 Using only $K$ largest EWs and EVs. $\tilde{\mathbf{A}}_{i, j} = \sum_{k}^K \mathbf{U}_{i, k} \mathbf{D}_{k,k} \mathbf{V}_{j, k} = \mathbf{U}_{i, k} \mathbf{D}_{k,k} (\mathbf{V}^\top)_{k, j}$.
 \begin{compactdesc}
