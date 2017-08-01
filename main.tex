@@ -83,8 +83,20 @@
 \section{Essentials}
 \subsection{Matrix/Vector}
 \begin{compactdesc}
-	\item[Inner Product:] $\langle \mathbf{x}, \mathbf{y} \rangle = \mathbf{x}^\top \mathbf{y} = \sum_{i=1}^{N} \mathbf{x}_i \mathbf{y}_i$.
+	\item[Inner Product:] $\langle \mathbf{x}, \mathbf{y} \rangle = \mathbf{x}^\top \mathbf{y} = \sum_{i=1}^{N} \mathbf{x}_i \mathbf{y}_i$
+	\begin{inparaitem}[\color{red}\textbullet]
+		\item $\langle \mathbf{x}, \mathbf{y+z} \rangle = \langle \mathbf{x}, \mathbf{y} \rangle + \langle \mathbf{x}, \mathbf{z} \rangle = \langle \mathbf{x+y}, \mathbf{z} \rangle $
+	\end{inparaitem}
+	\begin{inparaitem}[\color{red}\textbullet]
+		\item $\langle \alpha \mathbf{u}, \mathbf{a} \rangle = \alpha \langle \mathbf{u}, \mathbf{a} \rangle$
+	\end{inparaitem}
+	\item[orthogonal:] $\mathbf{A^{-1}} = \mathbf{A^{T}}$
+	\begin{inparaitem}[\color{red}\textbullet]
+		\item $det(\mathbf{A}) \in +1/-1$
+		\item $det(\mathbf{AA^{T}}) = 1$
+	\end{inparaitem}
 \end{compactdesc}
+
 $\mathrm{trace}(\mathbf{XYZ}) = \mathrm{trace}(\mathbf{ZXY})$
 
 \subsection{Norms}
@@ -99,17 +111,45 @@ $\mathrm{trace}(\mathbf{XYZ}) = \mathrm{trace}(\mathbf{ZXY})$
 \end{inparaitem}
 
 \subsection{Derivatives}
+\begin{compactdesc}
+	\item[$\partial f/\partial \mathbf{X}$:]
 \begin{inparaitem}[\color{red}\textbullet]
+  \item $\partial \mathbf{A} = 0$
+  \item $\partial(\alpha \mathbf{X}) = \alpha \partial \mathbf{X}$
+  \item $\partial(\mathbf{X}+\mathbf{Y}) = \partial(\mathbf{X}) + \partial(\mathbf{Y})$
+  \item $\partial(trace(\mathbf{X})) = trace(\partial \mathbf{X})$
+  \item $\partial(\mathbf{X}\mathbf{Y}) = \partial(\mathbf{X})\mathbf{Y} +\mathbf{X}\partial(\mathbf{Y})$
+  \item $\partial(\mathbf{X^{-1}}) = -\mathbf{X^{-1}} (\partial\mathbf{X}) \mathbf{X^{-1}}$
+  \item $\partial \mathbf{X^{T}} = (\partial \mathbf{X})^{T}$
+  \end{inparaitem}
+  \item[Vectors:]
+  \begin{inparaitem}[\color{red}\textbullet]
   \item $\frac{\partial}{\partial \mathbf{x}}(\mathbf{b}^\top \mathbf{x}) = \frac{\partial}{\partial \mathbf{x}}(\mathbf{x}^\top \mathbf{b}) = \mathbf{b}$
   \item $\frac{\partial}{\partial \mathbf{x}}(\mathbf{x}^\top \mathbf{x}) = 2\mathbf{x}$
+    \item $\frac{\partial}{\partial \mathbf{x}}(\mathbf{A} \mathbf{x}) = \mathbf{A}$
   \item $\frac{\partial}{\partial \mathbf{x}}(\mathbf{x}^\top \mathbf{A}\mathbf{x}) = (\mathbf{A}^\top + \mathbf{A})\mathbf{x} =^{\text{if \textbf{A} sym.}} 2\mathbf{A}\mathbf{x}$
   \item $\frac{\partial}{\partial \mathbf{x}}(\mathbf{b}^\top \mathbf{A}\mathbf{x}) = \mathbf{A}^\top \mathbf{b}$
+  \item $\frac{\partial}{\partial \mathbf{x}}(\mathbf{s}^\top \mathbf{A} \mathbf{r}) = (\frac{\partial s}{\partial \mathbf{x}})^\top \mathbf{A} \mathbf{r} + (\frac{\partial r}{\partial \mathbf{x}})^\top \mathbf{A}^\top \mathbf{s}$
+  \end{inparaitem}
+  \item[scalar $\alpha$:]
+  \begin{inparaitem}[\color{red}\textbullet]
+  	\item $\frac{\partial}{\partial \mathbf{x}}(\mathbf{y}^\top \mathbf{A} \mathbf{x}) = \mathbf{y}^\top \mathbf{A}$
+  	\item $\frac{\partial}{\partial \mathbf{y}}(\mathbf{y}^\top \mathbf{A} \mathbf{x}) = \mathbf{x}^\top \mathbf{A}^\top$
+  \end{inparaitem}
+  \item[Matrices:]
+  \begin{inparaitem}[\color{red}\textbullet]
+  \item $\frac{\partial}{\partial \mathbf{X}}(\mathbf{b}^\top \mathbf{X}^\top \mathbf{X} \mathbf{c}) = \mathbf{X} (\mathbf{b}\mathbf{c}^\top + \mathbf{c}\mathbf{b}^\top)$
   \item $\frac{\partial}{\partial \mathbf{X}}(\mathbf{c}^\top \mathbf{X} \mathbf{b}) = \mathbf{c}\mathbf{b}^\top$
   \item $\frac{\partial}{\partial \mathbf{X}}(\mathbf{c}^\top \mathbf{X}^\top \mathbf{b}) = \mathbf{b}\mathbf{c}^\top$
+  \item $\frac{\partial f}{\partial \mathbf{X}^\top} = (\frac{\partial f}{\partial \mathbf{X}})^\top$
+  \end{inparaitem}
+  \item[Norms:]
+  \begin{inparaitem}[\color{red}\textbullet]
   \item $\frac{\partial}{\partial \mathbf{x}}(\| \mathbf{x}-\mathbf{b} \|_2) = \frac{\mathbf{x}-\mathbf{b}}{\|\mathbf{x}-\mathbf{b}\|_2}$
   \item $\frac{\partial}{\partial \mathbf{x}}(\|\mathbf{x}\|^2_2) = \frac{\partial}{\partial \mathbf{x}} (\|\mathbf{x}^\top \mathbf{x}\|_2) = 2\mathbf{x}$
   \item $\frac{\partial}{\partial \mathbf{X}}(\|\mathbf{X}\|_F^2) = 2\mathbf{X}$
 \end{inparaitem}
+\end{compactdesc}
 
 \subsection{Eigendecomposition}
 \begin{inparaitem}[\color{red}\textbullet]
