@@ -106,7 +106,7 @@ $\mathrm{trace}(\mathbf{XYZ}) = \mathrm{trace}(\mathbf{ZXY})$
 	\item $\|\mathbf{x}\|_p := \left( \sum_{i=1}^{N} |x_i|^p \right)^{\frac{1}{p}}$
 	\item $\|\mathbf{X}\|_\star = \sum_{i=1}^{\min(m, n)} \sigma_i$
 	\item $\|\mathbf{A}\|_F :=\allowbreak \sqrt{\sum_{i=1}^{M} \sum_{j=1}^{N} |\mathbf{A}_{i, j}|^2} =\allowbreak \sqrt{\operatorname{trace}(\mathbf{A}^\top \mathbf{A})} =\allowbreak \sqrt{\sum_{i=1}^{\min\{m, n\}} \sigma_i^2}$
-	\item $\|\mathbf{M}\|_1 = \sum_{i,j}|m_{ij}|$
+	\item $\|\mathbf{X}\|_1 = \max_{1 \leq j \leq n} \sum_{i=1}^{m}|x_{ij}|$
     \item $\|\mathbf{X}\|_2 = \sigma_{max}(\mathbf{X})$
 \end{inparaitem}
 
@@ -415,8 +415,8 @@ Adapt the dictionary to signal characteristics. Objective: $(\mathbf{U}^\star, \
 \end{inparaenum}
 
 \section{Robust PCA}
+Idea: Approx. $\mathbf{X}$ with $\mathbf{L}_0 + \mathbf{S}_0$, $\mathbf{L}_0$ is low-rank, $\mathbf{S}_0$ is sparse.
 \begin{compactitem}
-	\item Idea: Approx. $\mathbf{X}$ with $\mathbf{L}_0 + \mathbf{S}_0$, $\mathbf{L}_0$ is low-rank, $\mathbf{S}_0$ is sparse.
 	\item $\min_{\mathbf{L},\mathbf{S}}\mathsf{rank}(\mathbf{L}) + \mu \lVert \mathbf{S}\rVert_0$, s. t. $\mathbf{L} + \mathbf{S} = \mathbf{X}$. As non-convex, change to $\min_{\mathbf{L},\mathbf{S}} \|\mathbf{L}\|_\star + \lambda \lVert\mathbf{S}\rVert_1$ (\emph{not} the same in general)
     \item Perfect reconstruction is \emph{not} possible if $\mathbf{S}$ is low-rank, $\mathbf{L}$ is sparse, or $\mathbf{X}$ is low-rank \textit{and} sparse. Formally coherence: $\|\mathbf{U}^\top \mathbf{e}_i\|^2 \leq \frac{\nu r}{n}$, $\|\mathbf{V}^\top \mathbf{e}_i\|^2 \leq \frac{\nu r}{n}$, $\|\mathbf{UV}^\top\|^2_{ij} \leq \frac{\nu r}{n^2}$ : $\mathbf{L}=\mathbf{U}\mathbf{D}\mathbf{V}^\top$
 \end{compactitem}
