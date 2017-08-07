@@ -309,7 +309,17 @@ $ \min_{\mathbf{\red{U}}, \mathbf{\red{V}}} J(\mathbf{\red{U}}, \mathbf{\red{V}}
 \section{Convolutional Neural Networks}
 \textbf{Neurons}: $F_\sigma(\mathbf{\red{x}};\mathbf{\red{w}}) = \sigma(w_0 + \sum_{i=1}^M{x_iw_i})$. \textbf{Output}: linear regression; $\mathbf{\red{y}} = \mathbf{\red{W}}^L\mathbf{\red{x}}^{L-1}$, binary classification; $y_1 = \text{P}[Y=1|\mathbf{\red{x}}] = \frac{1}{1 + \exp[-\langle \mathbf{\red{w}}_1^L,\mathbf{\red{x}}^{L-1}\rangle]}$, multiclass; $y_k = \text{P}[Y=k|\mathbf{\red{x}}]= \frac{\exp[\langle \mathbf{\red{w}}_k^L,\mathbf{\red{x}}^{L-1}\rangle]}{\sum_{m=1}^{K}{\exp[\langle \mathbf{\red{w}}_m^L, \mathbf{\red{x}}^{L-1}\rangle]}}$. \textbf{Loss function} $l(y, \hat{y})$: squared loss; $\frac{1}{2}(y - \hat{y})^2$, cross-entropy loss; $-y \log \hat{y} - (1-y)\log(1-\hat{y})$.
 Convolution: $F_{n,m}(\mathbf{\red{x}};\mathbf{\red{w}}) = \sigma(b + \sum_{k=-2}^2\sum_{l=-2}^{2}{w_{k,l}x_{n+k,m+l}})$.
-
+\begin{inparaitem}[\color{red}\textbullet]
+	\item $l$ n-channel filters $K^l$
+	\item channel $K^l_c, c\in{[1..n]}$
+	\item pixels $(K^l_c)_{i,j}, -k \leq i,j \leq k$
+	\item input image $(I_c)_{1\leq{c}\leq{n}}$: pixels $(I_c)_{i,j}$
+	\item output conv layer $(i',j')$: $(I \star K^l)_{i',j'} = \sum_{1 \leq c \leq n} \sum_{-k \leq i,j \leq k} (I_c)_{i'+i,j'+j} (K_c^l)_{ij}$
+	\item zero padding: $(I_c)_{a,b} = 0$ outside pixel range
+	\item non-linearity $ReLU(x) = max(0,x)$ applied to each pixel
+	\item conv \& ReLU: $ReLU((I \star K^l))_{i',j'}$
+	\item per channel max-pooling (3x3) without stride, image pixel (i,j): $\max_{-1 \leq i',j' \leq 1} (ReLU(I \star K^l))_{i+i',j+j'}$
+\end{inparaitem}
 
 \section{Optimization}
 
