@@ -161,9 +161,9 @@ $\mathrm{trace}(\mathbf{\red{XYZ}}) = \mathrm{trace}(\mathbf{\red{ZXY}})$
 
 \subsection{Eigendecomposition}
 \begin{inparaitem}[\color{red}\textbullet]
-  \item $\mathbf{\red{A}} \in \mathbb{R}^{N \times N}$ then $\mathbf{\red{A}} = \mathbf{\red{Q}} \red{\boldsymbol{\Lambda}} \mathbf{\red{Q}}^{-1}$ with $\mathbf{\red{Q}} \in \mathbb{R}^{N \times N}$.
-  \item if all eigenvalues nonzero: $\mathbf{\red{A}}^{-1} = \mathbf{\red{Q}} \red{\boldsymbol{\Lambda}}^{-1} \mathbf{\red{Q}}^{-1}$ and $(\red{\boldsymbol{\Lambda}}^{-1})_{i,i} = \frac{1}{\lambda_i}$
-  \item if $\mathbf{\red{A}}$ symmetric: $A = \mathbf{\red{Q}} \red{\boldsymbol{\Lambda}} \mathbf{\red{Q^\top}}$ (and $\mathbf{\red{Q}}$ is orthogonal).
+  \item $\mathbf{\red{A}} \in \mathbb{R}^{N \times N}$: $\mathbf{\red{A}} = \mathbf{\red{Q}} \red{\boldsymbol{\Lambda}} \mathbf{\red{Q}}^{-1}$ \& $\mathbf{\red{Q}} \in \mathbb{R}^{N \times N}$
+  \item if all $\lambda_i \neq 0$: $\mathbf{\red{A}}^{-1} = \mathbf{\red{Q}} \red{\boldsymbol{\Lambda}}^{-1} \mathbf{\red{Q}}^{-1}$ and $(\red{\boldsymbol{\Lambda}}^{-1})_{i,i} = \frac{1}{\lambda_i}$
+  \item if $\mathbf{\red{A}}$ symm.: $A = \mathbf{\red{Q}} \red{\boldsymbol{\Lambda}} \mathbf{\red{Q^\top}}$
 \end{inparaitem}
 
 \subsection{Probability / Statistics}
@@ -180,16 +180,16 @@ $\mathrm{trace}(\mathbf{\red{XYZ}}) = \mathrm{trace}(\mathbf{\red{ZXY}})$
 
 \section{Dimensionality Reduction / PCA}
 $\mathbf{\red{X}} \in \mathbb{R}^{D \times N}$. $N$ observations, $K$ properties. Target: $\tilde{\mathbf{\red{X}}} \in \mathbb{R}^{K \times N}$.
-\begin{compactenum}
-	\item Empirical Mean: $\overline{\mathbf{\red{x}}} = \frac{1}{N} \sum_{n=1}^N \mathbf{\red{x}}_n$
-	\item Center Data: $\overline{\mathbf{\red{X}}} = \mathbf{\red{X}} - [\overline{\mathbf{\red{x}}}, \ldots, \overline{\mathbf{\red{x}}}] = \mathbf{\red{X}} - \mathbf{\red{M}}$
+\begin{inparaenum}[\color{red} 1.]
+	\item Mean: $\overline{\mathbf{\red{x}}} = \frac{1}{N} \sum_{n=1}^N \mathbf{\red{x}}_n$
+	\item Center: $\overline{\mathbf{\red{X}}} = \mathbf{\red{X}} - [\overline{\mathbf{\red{x}}}, \ldots, \overline{\mathbf{\red{x}}}] = \mathbf{\red{X}} - \mathbf{\red{M}}$
 	\item Cov. Matrix: $\red{\boldsymbol{\Sigma}} = \frac{1}{N	} \sum_{n=1}^N (\mathbf{\red{x}}_n - \overline{\mathbf{\red{x}}}) (\mathbf{\red{x}}_n - \overline{\mathbf{\red{x}}})^\top = \frac{1}{N} \overline{\mathbf{\red{X}}}\overline{\mathbf{\red{X}}}^\top$
-	\item Eigenvalue Decomposition: $\red{\boldsymbol{\Sigma}} = \mathbf{\red{U}} \red{\boldsymbol{\Lambda}} \mathbf{\red{U}}^\top$
+	\item EVD: $\red{\boldsymbol{\Sigma}} = \mathbf{\red{U}} \red{\boldsymbol{\Lambda}} \mathbf{\red{U}}^\top$
 	\item Select $K < D$, $\Rightarrow \mathbf{\red{U}}_K, \red{\boldsymbol{\lambda}}_K$
-	\item Transform data onto new Basis: $\overline{\mathbf{\red{Z}}}_K = \mathbf{\red{U}}_K^\top \overline{\mathbf{\red{X}}}$
-	\item Reconstruct to original Basis: $\tilde{\overline{\mathbf{\red{X}}}} = \mathbf{\red{U}}_k \overline{\mathbf{\red{Z}}}_K$
+	\item Transform to new Basis: $\overline{\mathbf{\red{Z}}}_K = \mathbf{\red{U}}_K^\top \overline{\mathbf{\red{X}}}$
+	\item Reconstruct original Basis: $\tilde{\overline{\mathbf{\red{X}}}} = \mathbf{\red{U}}_k \overline{\mathbf{\red{Z}}}_K$
 	\item Reverse centering: $\tilde{\mathbf{\red{X}}} = \tilde{\overline{\mathbf{\red{X}}}} + \mathbf{\red{M}}$
-\end{compactenum}
+\end{inparaenum}
 
 \begin{compactitem}
 	\item $\mathbf{\red{U}}_k \in \mathbb{R}^{D \times K}, \red{\boldsymbol{\Sigma}} \in \mathbb{R}^{D \times D}, \overline{\mathbf{\red{Z}}}_K \in \mathbb{R}^{K \times N}, \overline{\mathbf{\red{X}}} \in \mathbb{R}^{D \times N}$
